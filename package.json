@@ -1,0 +1,26 @@
+{
+  "name": "leadscore-sample",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.8.2",
+    "radium": "^0.18.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.7",
+    "semantic-ui-react": "^0.68.1"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
