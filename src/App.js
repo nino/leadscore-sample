@@ -1,22 +1,34 @@
 /* @flow */
-import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import type { ApplicationState } from './store'
+import { getLoginState, isLoggedIn } from './LoginPage/selectors'
+import LoginPage from './LoginPage'
 
-class App extends Component {
-  render () {
-    return (
-      <div className='App'>
-        <div className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    )
-  }
-}
+// temporary stand-in for the contact-list
+const ContactList = () => (<div className='contact-list'>This is just for testing purposes</div>)
 
-export default App
+type AppProps = { isLoggedIn: boolean }
+
+export const App = ({ isLoggedIn }: AppProps) => (
+  <Router>
+    <div className='app-wrapper'>
+      <Route
+        path='/'
+        component={() => isLoggedIn ? (<Redirect to={{ pathname: '/contacts' }} />) : (<Redirect to={{ pathname: '/login' }} />)}
+      />
+      <Route
+        path='/contacts'
+        component={isLoggedIn ? ContactList : () => <Redirect to={{ pathname: '/login' }} />}
+      />
+      <Route path='/login' component={isLoggedIn ? () => <Redirect to={{ pathname: '/contacts' }} /> : LoginPage} />
+    </div>
+  </Router>
+)
+
+const stateToProps = (state: ApplicationState) => ({
+  isLoggedIn: isLoggedIn(getLoginState(state))
+})
+
+export default connect(stateToProps)(App)
