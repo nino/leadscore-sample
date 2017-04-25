@@ -23,8 +23,8 @@ import * as API from '../LeadscoreAPI'
 export function * login (): Generator<any, any, any> {
   const selector = state => getLoginForm(getLoginState(state))
   const loginForm = yield select(selector)
-  const { userName, password } = loginForm
-  const apiResponse = yield call(API.login, userName, password)
+  const { userNameField, passwordField } = loginForm
+  const apiResponse = yield call(API.login, userNameField, passwordField)
   if (
     apiResponse.user &&
     apiResponse.user.id &&
