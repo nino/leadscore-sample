@@ -87,7 +87,8 @@ export type PagedContactsDTO = {
 }
 
 export function getContacts (authToken: string): Promise<PagedContactsDTO|APIFailureResponse> {
-  return axios.get(BASE_URL + 'contacts', { authToken })
+  console.log(authToken)
+  return axios.get(BASE_URL + 'contacts', { headers: { authToken } })
     .then((response) => {
       if (response.status === 200) {
         return response.data
