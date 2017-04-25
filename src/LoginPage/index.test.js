@@ -10,7 +10,7 @@ import {
   values,
   zipObject,
   map,
-  last,
+  last
 } from 'lodash'
 import { LoginPage } from './index'
 
@@ -22,8 +22,8 @@ const SampleComponents = {
     <LoginPage
       isLoggedIn={false}
       isLoggingIn={false}
-      userNameField="..."
-      passwordField="123"
+      userNameField='...'
+      passwordField='123'
       updateLoginForm={updateLoginForm}
       requestLogin={requestLogin}
     />
@@ -31,9 +31,9 @@ const SampleComponents = {
   loggingIn: (
     <LoginPage
       isLoggedIn={false}
-      isLoggingIn={true}
-      userNameField="..."
-      passwordField="123"
+      isLoggingIn
+      userNameField='...'
+      passwordField='123'
       updateLoginForm={updateLoginForm}
       requestLogin={requestLogin}
     />
@@ -42,13 +42,13 @@ const SampleComponents = {
     <LoginPage
       isLoggingIn={false}
       isLoggedIn={false}
-      error="Invalid user name"
-      userNameField="..."
-      passwordField="123"
+      error='Invalid user name'
+      userNameField='...'
+      passwordField='123'
       updateLoginForm={updateLoginForm}
       requestLogin={requestLogin}
     />
-  ),
+  )
 }
 
 const SampleComponentsShallow = zipObject(keys(SampleComponents), map(values(SampleComponents), c => shallow(c)))

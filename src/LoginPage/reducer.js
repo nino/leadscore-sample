@@ -1,7 +1,7 @@
 /* @flow */
-import { omit } from 'lodash';
-import type { Action } from '../actionTypes';
-import { errorMessages } from './constants';
+import { omit } from 'lodash'
+import type { Action } from '../actionTypes'
+import { errorMessages } from './constants'
 
 export type LoginState = {
   isLoggedIn: bool,
@@ -22,25 +22,25 @@ export const INITIAL_STATE: LoginState = {
   isLoggingIn: false,
   loginForm: {
     userNameField: '',
-    passwordField: '',
-  },
-};
+    passwordField: ''
+  }
+}
 
-function englishifyError(message: string): string {
-  return errorMessages[message] || 'An unknown error occurred';
+function englishifyError (message: string): string {
+  return errorMessages[message] || 'An unknown error occurred'
 }
 
 export default function reducer (state: LoginState = INITIAL_STATE, action: Action): LoginState {
   if (action == null || action.type == null) {
-    return state;
+    return state
   }
   switch (action.type) {
     case 'LoginPage/REQUEST_LOGIN':
       return {
         ...omit(state, 'error'),
         isLoggingIn: true,
-        isLoggedIn: false,
-      };
+        isLoggedIn: false
+      }
     case 'LoginPage/SUCCESS_LOGIN':
       return {
         ...omit(state, 'error'),
@@ -48,15 +48,15 @@ export default function reducer (state: LoginState = INITIAL_STATE, action: Acti
         isLoggingIn: false,
         userId: action.userId,
         userToken: action.userToken,
-        userTokenExpirationDate: action.userTokenExpirationDate,
-      };
+        userTokenExpirationDate: action.userTokenExpirationDate
+      }
     case 'LoginPage/ERROR_LOGIN':
       return {
         ...omit(state, ['userToken', 'userTokenExpirationDate', 'userId', 'userName']),
         isLoggedIn: false,
         isLoggingIn: false,
-        error: englishifyError(action.reason),
-      };
+        error: englishifyError(action.reason)
+      }
     case 'LoginPage/UPDATE_LOGIN_FORM':
       return {
         ...state,
@@ -69,10 +69,10 @@ export default function reducer (state: LoginState = INITIAL_STATE, action: Acti
           userNameField: (action.key === 'userName'
             ? action.value
             : state.loginForm.userNameField
-          ),
-        },
+          )
+        }
       }
     default:
-      return state;
+      return state
   }
 }

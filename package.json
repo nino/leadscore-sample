@@ -5,6 +5,8 @@
   "dependencies": {
     "chai": "^3.5.0",
     "enzyme": "^2.8.2",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-node": "^4.2.2",
     "flow-bin": "^0.44.2",
     "lodash": "^4.17.4",
     "radium": "^0.18.2",
@@ -20,7 +22,7 @@
   "devDependencies": {
     "autoprefixer": "6.7.2",
     "babel-core": "6.22.1",
-    "babel-eslint": "7.1.1",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "18.0.0",
     "babel-loader": "6.2.10",
     "babel-preset-react-app": "^2.2.0",
@@ -32,7 +34,7 @@
     "css-loader": "0.26.1",
     "detect-port": "1.1.0",
     "dotenv": "2.0.0",
-    "eslint": "3.16.1",
+    "eslint": "^3.19.0",
     "eslint-config-react-app": "^0.6.2",
     "eslint-loader": "1.6.0",
     "eslint-plugin-flowtype": "2.21.0",
@@ -90,8 +92,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }

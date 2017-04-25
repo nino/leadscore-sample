@@ -1,4 +1,5 @@
 /* @flow */
+/* global SyntheticEvent, SyntheticInputEvent */
 import React from 'react'
 import { Input, Button } from 'semantic-ui-react'
 import type { ApplicationState } from '../store'
@@ -9,7 +10,7 @@ import {
   isLoggingIn,
   getError,
   getUserNameField,
-  getPasswordField,
+  getPasswordField
 } from './selectors'
 
 import { connect } from 'react-redux'
@@ -29,7 +30,7 @@ export const LoginPage = ({
   isLoggingIn,
   error = '',
   requestLogin,
-  updateLoginForm,
+  updateLoginForm
 }: LoginPageProps) => {
   function handleSubmit (event: SyntheticEvent): void {
     event.preventDefault()
@@ -40,8 +41,7 @@ export const LoginPage = ({
 
   return (
     <div className='login-page'>
-      <div className='login-header'>
-      </div>
+      <div className='login-header' />
       <form className='login-form' onSubmit={handleSubmit}>
         {error ? <div className='login-error'>{error}</div> : <div />}
         <label htmlFor='userNameField'>
@@ -70,7 +70,8 @@ export const LoginPage = ({
         </Button>
       </form>
     </div>
-    )}
+  )
+}
 
 const stateToProps = (state: ApplicationState) => {
   const loginState = getLoginState(state)
@@ -78,13 +79,13 @@ const stateToProps = (state: ApplicationState) => {
     userNameField: getUserNameField(loginState),
     passwordField: getPasswordField(loginState),
     isLoggingIn: isLoggingIn(loginState),
-    error: getError(loginState),
+    error: getError(loginState)
   }
 }
 
 const dispatchToProps = (dispatch: (Action) => void) => ({
   requestLogin: () => dispatch(requestLogin()),
-  updateLoginForm: (k, v) => dispatch(updateLoginForm(k, v)),
+  updateLoginForm: (k, v) => dispatch(updateLoginForm(k, v))
 })
 
 export default connect(stateToProps, dispatchToProps)(LoginPage)
