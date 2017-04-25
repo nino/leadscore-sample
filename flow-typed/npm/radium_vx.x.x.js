@@ -1,4 +1,4 @@
-// flow-typed signature: c802c94761e3fd7a6c032ad52ee85eec
+// flow-typed signature: 86d3f1aa777c5b31f7d275d40888c7e5
 // flow-typed version: <<STUB>>/radium_v^0.18.2/flow_v0.44.2
 
 /**
@@ -155,46 +155,6 @@ declare module 'radium/src/__mocks__/exenv' {
 }
 
 declare module 'radium/src/__mocks__/prefixer' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/camel-case-props-to-dash-case-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/enhancer-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/get-state-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/keyframes-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/media-query-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/radium-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/remove-nested-styles-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/resolve-styles-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/style-component-test' {
-  declare module.exports: any;
-}
-
-declare module 'radium/src/__tests__/visited-test' {
   declare module.exports: any;
 }
 
@@ -420,36 +380,6 @@ declare module 'radium/src/__mocks__/exenv.js' {
 }
 declare module 'radium/src/__mocks__/prefixer.js' {
   declare module.exports: $Exports<'radium/src/__mocks__/prefixer'>;
-}
-declare module 'radium/src/__tests__/camel-case-props-to-dash-case-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/camel-case-props-to-dash-case-test'>;
-}
-declare module 'radium/src/__tests__/enhancer-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/enhancer-test'>;
-}
-declare module 'radium/src/__tests__/get-state-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/get-state-test'>;
-}
-declare module 'radium/src/__tests__/keyframes-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/keyframes-test'>;
-}
-declare module 'radium/src/__tests__/media-query-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/media-query-test'>;
-}
-declare module 'radium/src/__tests__/radium-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/radium-test'>;
-}
-declare module 'radium/src/__tests__/remove-nested-styles-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/remove-nested-styles-test'>;
-}
-declare module 'radium/src/__tests__/resolve-styles-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/resolve-styles-test'>;
-}
-declare module 'radium/src/__tests__/style-component-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/style-component-test'>;
-}
-declare module 'radium/src/__tests__/visited-test.js' {
-  declare module.exports: $Exports<'radium/src/__tests__/visited-test'>;
 }
 declare module 'radium/src/append-important-to-each-value.js' {
   declare module.exports: $Exports<'radium/src/append-important-to-each-value'>;

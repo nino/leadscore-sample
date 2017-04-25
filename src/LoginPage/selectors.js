@@ -20,6 +20,14 @@ export function getError (state: LoginState): ?string {
   }
 }
 
+export function getUserToken (state: LoginState): ?string {
+  return state.userToken || null
+}
+
+export function getUserTokenExpirationDate (state: LoginState): number {
+  return state.userTokenExpirationDate || 0
+}
+
 export function getLoginForm (state: LoginState): {
   +userNameField: string, +passwordField: string
 } {
