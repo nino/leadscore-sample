@@ -5,8 +5,11 @@
   "dependencies": {
     "chai": "^3.5.0",
     "enzyme": "^2.8.2",
+    "flow-bin": "^0.44.2",
+    "lodash": "^4.17.4",
     "radium": "^0.18.2",
     "react": "^15.5.4",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",

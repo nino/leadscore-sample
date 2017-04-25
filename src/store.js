@@ -1,3 +1,10 @@
 import { combineReducers } from 'redux';
+import LoginPage, { type LoginState } from './LoginPage/reducer';
 
-export default combineReducers({});
+export type ApplicationState = {
+  LoginPage: LoginState,
+};
+
+export default combineReducers({
+  LoginPage,
+});

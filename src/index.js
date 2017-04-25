@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -21,6 +22,7 @@ ReactDOM.render(
 );
 
 if (module.hot) {
+  // $FlowFixMe
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default;
     ReactDOM.render(
