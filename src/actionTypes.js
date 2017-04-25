@@ -1,5 +1,5 @@
 /* @flow */
-import type { LoginPageAction } from './LoginPage/actionTypes';
+import type { LoginPageAction } from './LoginPage/actionTypes'
 
 export type DefaultAction = { type: 'DEFAULT_ACTION' };
 

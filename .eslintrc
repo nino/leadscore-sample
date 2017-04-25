@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react"],
+  "installedESLint": true,
+  "plugins": [
+    "babel",
+    "react",
+    "jsx-a11y",
+    "import",
+    "flowtype"
+  ]
+}
