@@ -39,5 +39,5 @@ export function getUserNameField (state: LoginState): string {
 }
 
 export function getPasswordField (state: LoginState): string {
-  return getLoginForm(state).userNameField
+  return getLoginForm(state).passwordField
 }
