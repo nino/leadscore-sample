@@ -16,6 +16,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "flow-bin": "^0.44.2",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "radium": "^0.18.2",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
