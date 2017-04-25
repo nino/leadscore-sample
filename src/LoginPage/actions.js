@@ -3,7 +3,9 @@ import type {
   RequestLogin,
   SuccessLogin,
   ErrorLogin,
-  UpdateLoginForm
+  UpdateLoginForm,
+  RequestLogout,
+  SuccessLogout
 } from './actionTypes'
 
 export function requestLogin (): RequestLogin {
@@ -20,4 +22,12 @@ export function errorLogin (reason: string): ErrorLogin {
 
 export function updateLoginForm (key: string, value: string): UpdateLoginForm {
   return { type: 'LoginPage/UPDATE_LOGIN_FORM', key, value }
+}
+
+export function requestLogout (): RequestLogout {
+  return { type: 'LoginPage/REQUEST_LOGOUT' }
+}
+
+export function successLogout (): SuccessLogout {
+  return { type: 'LoginPage/SUCCESS_LOGOUT' }
 }
