@@ -14,7 +14,9 @@ import {
   requestLogin,
   successLogin,
   errorLogin,
-  updateLoginForm
+  updateLoginForm,
+  requestLogout,
+  successLogout
 } from './actions'
 import { errorMessages } from './constants'
 
@@ -23,8 +25,17 @@ const SampleStateLoggingIn: LoginState = {
   isLoggingIn: true
 }
 
+const SampleStateLoggedIn: LoginState = {
+  ...INITIAL_STATE,
+  isLoggedIn: true,
+  userToken: 'token_abc',
+  userTokenExpirationDate: 123
+}
+
 const SampleStates: LoginState[] = [
-  INITIAL_STATE
+  INITIAL_STATE,
+  SampleStateLoggingIn,
+  SampleStateLoggedIn
 ]
 
 describe('DefaultAction', () => {
@@ -38,12 +49,12 @@ describe('DefaultAction', () => {
 
 describe('requestLogin', () => {
   it('sets isLoggingIn to true, isLoggedIn to false, and removes error', () => {
-    SampleStates.forEach((state) => {
+    each(SampleStates, state => {
       const newState = reducer(state, requestLogin())
       expect(newState).to.have.property('isLoggingIn', true)
       expect(newState).to.have.property('isLoggedIn', false)
       expect(newState).to.not.have.property('error')
-      expect(omit(newState, 'isLoggingIn')).to.eql(omit(state, 'isLoggingIn'))
+      expect(omit(newState, ['isLoggingIn', 'isLoggedIn'])).to.eql(omit(state, ['isLoggingIn', 'isLoggedIn']))
     })
   })
 })
@@ -101,6 +112,27 @@ describe('updateLoginForm', () => {
       const newState = reducer(state, updateLoginForm('password', '1234'))
       expect(omit(newState, 'loginForm.passwordField')).to.deep.eql(omit(state, 'loginForm.passwordField'))
       expect(newState).to.have.deep.property('loginForm.passwordField', '1234')
+    })
+  })
+})
+
+describe('requestLogout', () => {
+  it('sets isLoggingOut=true and isLoggingIn=false', () => {
+    each(SampleStates, state => {
+      const newState = reducer(state, requestLogout())
+      const changingFields = ['isLoggingIn', 'isLoggingOut']
+      expect(omit(newState, changingFields)).to.eql(omit(state, changingFields))
+      expect(newState).to.have.property('isLoggingIn', false)
+      expect(newState).to.have.property('isLoggingOut', true)
+    })
+  })
+})
+
+describe('successLogout', () => {
+  it('resets state to INITIAL_STATE', () => {
+    each(SampleStates, state => {
+      const newState = reducer(state, successLogout())
+      expect(newState).to.deep.eql(INITIAL_STATE)
     })
   })
 })

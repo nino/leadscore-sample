@@ -6,10 +6,11 @@ import { errorMessages } from './constants'
 export type LoginState = {
   isLoggedIn: bool,
   isLoggingIn: bool,
+  isLoggingOut?: bool,
   userName?: string,
   userId?: string,
   userToken?: string,
-  userTokenExpirationDate?: string,
+  userTokenExpirationDate?: number,
   error?: string,
   loginForm: {
     userNameField: string,
@@ -72,6 +73,14 @@ export default function reducer (state: LoginState = INITIAL_STATE, action: Acti
           )
         }
       }
+    case 'LoginPage/REQUEST_LOGOUT':
+      return {
+        ...state,
+        isLoggingOut: true,
+        isLoggingIn: false
+      }
+    case 'LoginPage/SUCCESS_LOGOUT':
+      return INITIAL_STATE
     default:
       return state
   }
