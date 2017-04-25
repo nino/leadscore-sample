@@ -6,8 +6,18 @@ import {
   put,
   call
 } from 'redux-saga/effects'
-import { successLogin, errorLogin } from './actions'
-import { getLoginState, getLoginForm } from './selectors'
+import moment from 'moment'
+import {
+  successLogin,
+  errorLogin,
+  successLogout
+} from './actions'
+import {
+  getLoginState,
+  getLoginForm,
+  getUserToken,
+  getUserTokenExpirationDate
+} from './selectors'
 import * as API from '../LeadscoreAPI'
 
 export function * login (): Generator<any, any, any> {
@@ -32,6 +42,26 @@ export function * login (): Generator<any, any, any> {
   }
 }
 
+export function * logout (): Generator<any, any, any> {
+  const tokenSelector = state => getLoginState(getUserToken(state))
+  const authToken = yield select(tokenSelector)
+  if (authToken == null) {
+    yield put(successLogout())
+    return
+  }
+
+  const expirationSelector = state => getLoginState(getUserTokenExpirationDate(state))
+  const tokenExpires = yield select(expirationSelector)
+  if (moment(tokenExpires).isBefore(moment())) {
+    yield put(successLogout())
+    return
+  }
+
+  yield call(API.logout, authToken)
+  yield put(successLogout())
+}
+
 export default function * loginSagas (): Generator<any, any, any> {
   yield takeLatest('LoginPage/REQUEST_LOGIN', login)
+  yield takeLatest('LoginPage/REQUEST_LOGOUT', logout)
 }

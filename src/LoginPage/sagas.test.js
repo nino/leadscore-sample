@@ -2,12 +2,14 @@
 /* eslint-env jest */
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
+import moment from 'moment'
 import {
   requestLogin,
   successLogin,
-  errorLogin
+  errorLogin,
+  successLogout
 } from './actions'
-import { login } from './sagas'
+import { login, logout } from './sagas'
 import * as API from '../LeadscoreAPI'
 
 describe('login', () => {
@@ -34,6 +36,8 @@ describe('login', () => {
     expect(next, 'must PUT LoginPage/SUCCESS_LOGIN')
       .to.have.deep.property('value.PUT.action')
       .and.to.eql(successLogin('user_id', 'token!', 567))
+
+    expect(generator.next()).to.have.property('done', true)
   })
 
   it('calls the API and dispatches LoginPage/ERROR_LOGIN upon failure', () => {
@@ -53,5 +57,64 @@ describe('login', () => {
     expect(next, 'must PUT LoginPage/ERROR_LOGIN')
       .to.have.deep.property('value.PUT.action')
       .and.to.eql(errorLogin('returned_error'))
+
+    expect(generator.next(), 'generator must be done').to.have.property('done', true)
+  })
+})
+
+describe('logout', () => {
+  it('calls the API and dispatches LoginPage/SUCESS_LOGOUT', () => {
+    const generator = logout()
+    let next = generator.next()
+
+    expect(next, 'must select userToken from store')
+      .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
+    next = generator.next('user_token')
+
+    expect(next, 'must select userTokenExpirationDate from store')
+      .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
+    next = generator.next(+moment().add(1, 'day'))
+
+    expect(next, 'must call Leadscore API')
+      .to.have.deep.property('value.CALL.fn', API.logout)
+    expect(next).to.have.deep.property('value.CALL.args').and.to.eql(['user_token'])
+    next = generator.next(true)
+
+    expect(next, 'must put LoginPage/SUCCESS_LOGOUT')
+      .to.have.deep.property('value.PUT.action').and.to.deep.eql(successLogout())
+
+    expect(generator.next(), 'generator must be done').to.have.property('done', true)
+  })
+
+  it('just dispatches LoginPage/SUCCESS_LOGOUT if userToken not present', () => {
+    const generator = logout()
+    let next = generator.next()
+
+    expect(next, 'must select userToken from store')
+      .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
+    next = generator.next(null)
+
+    expect(next, 'must put LoginPage/SUCCESS_LOGOUT')
+      .to.have.deep.property('value.PUT.action').and.to.eql(successLogout())
+
+    expect(generator.next(), 'generator must be done').to.have.property('done', true)
+  })
+
+  it('just dispatches LoginPage/SUCCESS_LOGOUT if userToken is expired', () => {
+    const generator = logout()
+    let next = generator.next()
+
+    expect(next, 'must select userToken from store')
+      .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
+    next = generator.next('user_taken')
+
+    expect(next, 'must select userTokenExpirationDate from store')
+      .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
+    next = generator.next(+moment().subtract(1, 'day'))
+
+    expect(next, 'must put LoginPage/SUCCESS_LOGOUT')
+      .to.have.deep.property('value.PUT.action').and.to.eql(successLogout())
+
+    expect(generator.next(), 'generator must be done').to.have.property('done', true)
   })
 })
