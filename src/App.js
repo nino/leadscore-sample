@@ -11,7 +11,7 @@ type AppProps = { isLoggedIn: boolean }
 
 export const App = ({ isLoggedIn }: AppProps) => (
   <Router>
-    <div className='app-wrapper'>
+    <div className='app-wrapper ui container' style={{ minWidth: '550px' }}>
       <Route
         path='/'
         component={() => isLoggedIn ? (<Redirect to={{ pathname: '/contacts' }} />) : (<Redirect to={{ pathname: '/login' }} />)}

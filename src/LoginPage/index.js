@@ -1,6 +1,7 @@
 /* @flow */
 /* global SyntheticEvent, SyntheticInputEvent */
 import React from 'react'
+import Radium from 'radium'
 import { Input, Button } from 'semantic-ui-react'
 import type { ApplicationState } from '../store'
 import type { Action } from '../actionTypes'
@@ -41,10 +42,28 @@ export const LoginPage = ({
 
   return (
     <div className='login-page'>
-      <div className='login-header' />
+      <Radium.Style
+        rules={{
+          label: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          },
+          'form.login-form': {
+            width: '300px',
+            margin: '64px auto',
+            textAlign: 'center'
+          },
+          '.userNameField, .passwordField': {
+            width: '220px'
+          }
+        }}
+      />
+      <h1 className='login-header ui header'>Leadscore.io Sample App</h1>
       <form className='login-form' onSubmit={handleSubmit}>
         {error ? <div className='login-error'>{error}</div> : <div />}
         <label htmlFor='userNameField'>
+          Username
           <Input
             disabled={isLoggingIn}
             className='userNameField'
@@ -53,15 +72,19 @@ export const LoginPage = ({
             onChange={(event: SyntheticInputEvent) => isLoggingIn || updateLoginForm('userName', event.target.value)}
           />
         </label>
+        <br />
         <label htmlFor='passwordField'>
+          Password
           <Input
             disabled={isLoggingIn}
             className='passwordField'
             name='passwordField'
+            type='password'
             value={passwordField}
             onChange={(event: SyntheticInputEvent) => isLoggingIn || updateLoginForm('password', event.target.value)}
           />
         </label>
+        <br />
         <Button
           className='login-button'
           disabled={isLoggingIn}
@@ -88,4 +111,4 @@ const dispatchToProps = (dispatch: (Action) => void) => ({
   updateLoginForm: (k, v) => dispatch(updateLoginForm(k, v))
 })
 
-export default connect(stateToProps, dispatchToProps)(LoginPage)
+export default connect(stateToProps, dispatchToProps)(Radium(LoginPage))
