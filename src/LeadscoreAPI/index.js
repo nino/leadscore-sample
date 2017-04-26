@@ -47,8 +47,9 @@ export function login (username: string, password: string): Promise<Authenticati
       }
     })
     .catch((err) => {
-      const message = (err.response.data && err.response.data.message) || 'unknown_error'
-      return { code: err.response.status, message }
+      const message = (err.response && err.response.data && err.response.data.message) || 'unknown_error'
+      const code = (err.response && err.response.status) || -1
+      return { code, message }
     })
 }
 
