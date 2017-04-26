@@ -3,7 +3,7 @@ import React from 'react'
 import { Input, Loader } from 'semantic-ui-react'
 import {
   filter,
-  each,
+  map,
   find,
   some,
   includes,
@@ -62,7 +62,7 @@ const ContactsTable = ({ contacts }: { contacts: ContactDTO[] }) => (
       </tr>
     </thead>
     <tbody>
-      {each(contacts, contact => (
+      {map(contacts, contact => (
         <tr key={contact.id}>
           <td>{contact.contactType === 'PERSON' ? (contact.firstName || '') + ' ' + (contact.lastName || '') : (contact.companyName || '')}</td>
           <td>{getPrimaryEmail(contact)}</td>
