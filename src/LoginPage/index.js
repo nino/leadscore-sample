@@ -61,6 +61,14 @@ export const LoginPage = ({
       />
       <h1 className='login-header ui header'>Leadscore.io Sample App</h1>
       <form className='login-form' onSubmit={handleSubmit}>
+        <Radium.Style
+          rules={{
+            '.login-error': {
+              color: 'red',
+              marginBottom: '12px'
+            }
+          }}
+        />
         {error ? <div className='login-error'>{error}</div> : <div />}
         <label htmlFor='userNameField'>
           Username
