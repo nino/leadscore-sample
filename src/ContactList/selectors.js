@@ -26,3 +26,7 @@ export function getFilter (state: ContactListState): string {
 export function getSortKey (state: ContactListState): string {
   return state.sortKey
 }
+
+export function getError (state: ContactListState): string {
+  return state.error || ''
+}

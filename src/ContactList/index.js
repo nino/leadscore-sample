@@ -18,7 +18,8 @@ import {
   isDownloaded,
   getContacts,
   getContactList,
-  getFilter
+  getFilter,
+  getError
 } from './selectors'
 import type { Action } from '../actionTypes'
 import { requestLogout } from '../LoginPage/actions'
@@ -29,6 +30,7 @@ type ContactListProps = {
   isDownloaded: boolean,
   contacts: ContactDTO[],
   filterString: string,
+  error: string,
   dispatch: (Action) => void
 }
 
@@ -83,11 +85,12 @@ export const ContactList = (props: ContactListProps) => {
     if (props.contacts.length > 0) {
       child = (<ContactsTable contacts={props.contacts} />)
     } else {
-      child = (<p>No contacts found ...</p>)
+      child = props.error ? (<p className='contactlist-error'>Error fetching contacts. Please try refreshing the page.</p>) : (<p>No contacts found ...</p>)
     }
   }
   return (
     <div className='contact-list-wrapper'>
+      <Radium.Style rules={{ '.contactlist-error': { color: 'red' } }} />
       <div
         className='contact-list-search-bar'
         style={{
@@ -120,7 +123,8 @@ const stateToProps = (state: ApplicationState) => {
     isDownloading: isDownloading(localState),
     isDownloaded: isDownloaded(localState),
     contacts: contactsFiltered,
-    filterString
+    filterString,
+    error: getError(localState)
   }
 }
 
