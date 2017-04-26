@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react'
-import { Input, Loader } from 'semantic-ui-react'
+import Radium from 'radium'
+import { Input, Loader, Button } from 'semantic-ui-react'
 import {
   filter,
   map,
@@ -20,6 +21,7 @@ import {
   getFilter
 } from './selectors'
 import type { Action } from '../actionTypes'
+import { requestLogout } from '../LoginPage/actions'
 import { setFilter } from './actions'
 
 type ContactListProps = {
@@ -53,8 +55,8 @@ function getPrimaryPhoneNumber (contact: ContactDTO): string {
 }
 
 const ContactsTable = ({ contacts }: { contacts: ContactDTO[] }) => (
-  <table>
-    <thead>
+  <table className='ui table'>
+    <thead style={{ backgroundColor: '#ddd' }}>
       <tr>
         <td>Name</td>
         <td>Email</td>
@@ -81,13 +83,25 @@ export const ContactList = (props: ContactListProps) => {
     if (props.contacts.length > 0) {
       child = (<ContactsTable contacts={props.contacts} />)
     } else {
-      child = (<p>You do not have any contacts yet. Create some at <a href='https://leadscore.io'>leadscore.io</a> and come back later.</p>)
+      child = (<p>No contacts found ...</p>)
     }
   }
   return (
     <div className='contact-list-wrapper'>
-      <div className='contact-list-search-bar'>
-        <Input value={props.filterString} onChange={(event) => props.dispatch(setFilter(event.target.value))} />
+      <div
+        className='contact-list-search-bar'
+        style={{
+          padding: '24px 0px'
+        }}
+      >
+        <Input
+          value={props.filterString}
+          onChange={(event) => props.dispatch(setFilter(event.target.value))}
+          style={{ width: '400px' }}
+          icon={{ name: 'search' }}
+          placeholder='Filter contacts ...'
+        />
+        <Button style={{ float: 'right' }} onClick={() => props.dispatch(requestLogout())}>Log out</Button>
       </div>
       <div className='contact-list'>
         {child}
@@ -110,4 +124,4 @@ const stateToProps = (state: ApplicationState) => {
   }
 }
 
-export default connect(stateToProps)(ContactList)
+export default connect(stateToProps)(Radium(ContactList))
