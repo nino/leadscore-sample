@@ -52,7 +52,7 @@ export function * logout (): Generator<any, any, any> {
 
   const expirationSelector = state => getUserTokenExpirationDate(getLoginState(state))
   const tokenExpires = yield select(expirationSelector)
-  if (moment(tokenExpires).isBefore(moment())) {
+  if (moment(tokenExpires * 1000).isBefore(moment())) {
     yield put(successLogout())
     return
   }
