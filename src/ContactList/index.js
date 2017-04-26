@@ -38,7 +38,7 @@ function getPrimaryEmail (contact: ContactDTO): string {
   if (contact.emails == null) {
     return ''
   }
-  const primary = find(contact.emails, e => e.primary)
+  const primary = find(contact.emails, e => e.type === 'PRIMARY')
   if (primary == null || primary.email == null) {
     return ''
   }
@@ -49,7 +49,7 @@ function getPrimaryPhoneNumber (contact: ContactDTO): string {
   if (contact.phoneNumbers == null) {
     return ''
   }
-  const primary = find(contact.phoneNumbers, e => e.primary)
+  const primary = find(contact.phoneNumbers, e => e.type === 'PRIMARY')
   if (primary == null || primary.number == null) {
     return ''
   }
