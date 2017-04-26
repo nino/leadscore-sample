@@ -19,7 +19,7 @@ describe('login', () => {
 
     expect(next, 'must SELECT login form')
       .to.have.deep.property('value.SELECT.selector').and.be.a('function')
-    next = generator.next({ userName: 'person', password: '1234' })
+    next = generator.next({ userNameField: 'person', passwordField: '1234' })
 
     expect(next, 'must CALL API.login')
       .to.have.deep.property('value.CALL.fn').and.to.eql(API.login)
@@ -46,7 +46,7 @@ describe('login', () => {
 
     expect(next, 'must SELECT login form')
       .to.have.deep.property('value.SELECT.selector').and.to.be.a('function')
-    next = generator.next({ userName: 'person', password: '1234' })
+    next = generator.next({ userNameField: 'person', passwordField: '1234' })
 
     expect(next, 'must CALL API.login')
       .to.have.deep.property('value.CALL.fn').and.to.eql(API.login)
