@@ -43,14 +43,14 @@ export function * login (): Generator<any, any, any> {
 }
 
 export function * logout (): Generator<any, any, any> {
-  const tokenSelector = state => getLoginState(getUserToken(state))
+  const tokenSelector = state => getUserToken(getLoginState(state))
   const authToken = yield select(tokenSelector)
   if (authToken == null) {
     yield put(successLogout())
     return
   }
 
-  const expirationSelector = state => getLoginState(getUserTokenExpirationDate(state))
+  const expirationSelector = state => getUserTokenExpirationDate(getLoginState(state))
   const tokenExpires = yield select(expirationSelector)
   if (moment(tokenExpires).isBefore(moment())) {
     yield put(successLogout())
