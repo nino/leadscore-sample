@@ -72,6 +72,6 @@ describe('Components', () => {
   })
 
   it('Message saying that no contacts exist)', () => {
-    expect(componentLoadedNoContacts.text()).to.include('any contacts')
+    expect(componentLoadedNoContacts.text()).to.include('contacts')
   })
 })
